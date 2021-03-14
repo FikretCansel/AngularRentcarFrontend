@@ -1,0 +1,12 @@
+
+
+<h2>{{carDetail.brandName}}</h2>
+<h3>{{carDetail.carName}}</h3>
+<h5>Fiyat:{{carDetail.dailyPrice}}</h5>
+<h5>Model:{{carDetail.modelYear}}</h5>
+<h5>Renk:{{carDetail.colorName}}</h5>
+<div *ngFor="let Image of carDetail.carImages">
+    <img src="https://localhost:44395{{Image.imagePath}}" width="500px" > 
+</div>
+
+<h5>{{carDetail.description}}</h5>
