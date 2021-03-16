@@ -1,12 +1,33 @@
-
-
 <h2>{{carDetail.brandName}}</h2>
 <h3>{{carDetail.carName}}</h3>
-<h5>Fiyat:{{carDetail.dailyPrice}}</h5>
-<h5>Model:{{carDetail.modelYear}}</h5>
-<h5>Renk:{{carDetail.colorName}}</h5>
-<div *ngFor="let Image of carDetail.carImages">
-    <img src="https://localhost:44395{{Image.imagePath}}" width="500px" > 
+<div class="container">
+    <div class="ImageBox">
+        <div *ngFor="let Image of carDetail.carImages;let i = index" [attr.data-index]="i">
+            <img class="card-img-center" *ngIf="i+1==ImageIndex" src="https://localhost:44395{{Image.imagePath}}"
+                height="300px">
+        </div>
+    </div>
+    <div class="buttons">
+        <button (click)="backImage()" class="btn btn-primary">Önceki Resim</button>
+        <h3>{{ImageIndex}}</h3>
+        <button (click)="nextImage()" class="btn btn-primary">Sonraki Resim</button>
+    </div>
+    <div class="details">
+        <tr class="detail">
+            <td>Fiyat:</td>
+            <td>{{carDetail.dailyPrice}} TL</td>
+        </tr>
+        <tr class="detail">
+            <td>Model:</td>
+            <td>{{carDetail.modelYear}}</td>
+        </tr>
+        <tr class="detail">
+            <td>Renk:</td>
+            <td>{{carDetail.colorName}}</td>
+        </tr>
+        <tr class="detail">
+            <td>Açıklama:</td>
+            <td>{{carDetail.description}}</td>
+        </tr>
+    </div>
 </div>
-
-<h5>{{carDetail.description}}</h5>
