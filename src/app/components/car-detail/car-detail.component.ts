@@ -32,7 +32,7 @@ export class CarDetailComponent implements OnInit {
 
   nextImage(){
     if(this.ImageIndex<this.carDetail.carImages.length)
-    this.ImageIndex++;
+      this.ImageIndex++;
   }
   backImage(){
     if(this.ImageIndex>1)

@@ -1,17 +1,18 @@
 <h2>{{carDetail.brandName}}</h2>
 <h3>{{carDetail.carName}}</h3>
 <div class="container">
-    <div class="ImageBox">
-        <div *ngFor="let Image of carDetail.carImages;let i = index" [attr.data-index]="i">
+    <div class="ImageBox" *ngIf="carDetail.carImages.length;else nonImage">
+        <div class="Image" *ngFor="let Image of carDetail.carImages;let i = index" [attr.data-index]="i">
             <img class="card-img-center" *ngIf="i+1==ImageIndex" src="https://localhost:44395{{Image.imagePath}}"
                 height="300px">
         </div>
+        <div class="buttons">
+            <button (click)="backImage()" class="btn btn-primary">Önceki Resim</button>
+            <h3>{{ImageIndex}}</h3>
+            <button (click)="nextImage()" class="btn btn-primary">Sonraki Resim</button>
+        </div>
     </div>
-    <div class="buttons">
-        <button (click)="backImage()" class="btn btn-primary">Önceki Resim</button>
-        <h3>{{ImageIndex}}</h3>
-        <button (click)="nextImage()" class="btn btn-primary">Sonraki Resim</button>
-    </div>
+    <ng-template #nonImage>Resim Bulunamadı..</ng-template>
     <div class="details">
         <tr class="detail">
             <td>Fiyat:</td>

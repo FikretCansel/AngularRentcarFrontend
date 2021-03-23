@@ -1,0 +1,27 @@
+.carBox-header{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.CarBox{
+    margin-top: 10px;
+}
+.CarBox .infos{
+    display: flex;
+    justify-content: space-around;
+}
+.stripe{
+    border-left: 1px solid #808080;
+    height: 20px;
+}
+.carButton{
+    padding-inline: 50px;
+    margin-left: 5px;
+}
+.description{
+    display: flex;
+    justify-content: space-between;
+}
+.filterButton{
+    margin-top: 22px;
+}

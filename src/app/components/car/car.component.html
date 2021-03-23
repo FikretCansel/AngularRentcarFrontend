@@ -1,25 +1,60 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="sel1">Marka Seçiniz:</label>
+            <select class="form-control" id="sel1">
+                <option>Fark Etmez</option>
+                <option *ngFor="let brand of brands">{{brand.name}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="sel1">Renk Seçin:</label>
+            <select class="form-control" id="sel1">
+                <option>Fark Etmez</option>
+                <option *ngFor="let color of colors">{{color.name}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="text" class="form-control" placeholder="min-TL">
+            <input type="text" class="form-control" placeholder="max-TL">
+        </div>
+        <div class="col md-3">
+            <button class="btn btn-info filterButton">Filitrele</button>
+        </div>
+    </div>
+</div>
+
 <h3>Kiralık Arabalar</h3>
 
 <div *ngIf="dataLoaded==false" class="spinner-border" role="status">
     <span class="visually-hidden"></span>
-  </div>
+</div>
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Arabaları Filitrele</label>
+    <input type="text" class="form-control" [(ngModel)]="filterText" id="carFilterText" placeholder="Tofaş">
+</div>
 
-<div class="table">
-    <thead>
-        <td>Id</td>
-        <td>Marka</td>
-        <td>Renk</td>
-        <td>Fiyat</td>
-        <td>Açıklama</td>
-        <td>Model</td>
-    </thead>
-    <tr *ngFor="let car of cars">
-        <td>{{car.carId}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.dailyPrice}}</td>
-        <td>{{car.description}}</td>
-        <td>{{car.modelYear}}</td>
-        <td><button class="btn btn-success" routerLink="/cars/detail/{{car.carId}}">Detaylar</button></td>
-    </tr>
+<div class="CarsBox">
+    <div *ngFor="let car of cars | carPipe:filterText" class="col-md-12 card CarBox">
+        <div class="carBox-header">
+            <h3>{{car.brandName}}</h3>
+            <div>
+                <button routerLink="/cars/detail/{{car.carId}}" class="btn btn-secondary">Detaylar</button>
+                <button class="btn btn-success carButton" routerLink="/payment/{{car.carId}}">Kirala</button>
+            </div>
+        </div>
+        <hr />
+        <div class="infos">
+            <h6>{{car.carName}}</h6>
+            <div class="stripe"></div>
+            <h6>Fiyat : {{car.dailyPrice}} TL/gün</h6>
+            <div class="stripe"></div>
+            <h6>Renk : {{car.colorName}}</h6>
+            <div class="stripe"></div>
+            <h6>Model : {{car.modelYear}}</h6>
+        </div>
+        <div class="description">
+            <h6>Açıklama : {{car.description}}</h6>
+        </div>
+    </div>
 </div>

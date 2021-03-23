@@ -1,4 +1,4 @@
-.ImageBox{
+.Image{
     height: 50%;
     display: flex;
     justify-content: center;
@@ -7,12 +7,13 @@
 .buttons{
     display: flex;
     justify-content: space-around;
+    margin: 10px;
 }
 .detail{
     font-size: 25px;
     font-family: sans-serif;
 }
 .details{
-    margin-top: 5px;
+    margin-top: 10px;
     border-style: groove;
 }

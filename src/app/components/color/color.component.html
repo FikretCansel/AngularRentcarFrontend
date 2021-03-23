@@ -1,1 +1,8 @@
-<p>color works!</p>
+<div class="md-3">
+    <input [(ngModel)]=filterText type="text" class="form-control" placeholder="Marka giriniz"/>
+</div>
+
+<ul class="list-group">
+    <li routerLink="/color/{{color.id}}"
+    *ngFor="let color of colors | brandPipe:filterText" class="btn list-group-item">{{color.name}}</li>
+</ul>

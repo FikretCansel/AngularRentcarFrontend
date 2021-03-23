@@ -1,6 +1,8 @@
-
+<div class="md-3">
+    <input [(ngModel)]=filterText type="text" class="form-control" placeholder="Marka giriniz"/>
+</div>
 
 <ul class="list-group">
     <li routerLink="/brand/{{brand.id}}"
-    *ngFor="let brand of brands" class="btn list-group-item">{{brand.name}}</li>
+    *ngFor="let brand of brands | brandPipe:filterText" class="btn list-group-item">{{brand.name}}</li>
 </ul>

@@ -10,6 +10,7 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandComponent implements OnInit {
 
   brands:Brand[]=[];
+  filterText="";
 
   constructor(private brandService:BrandService) { }
 
@@ -19,8 +20,6 @@ export class BrandComponent implements OnInit {
   getBrands(){
     this.brandService.getBrandsService().subscribe((response)=>{
       this.brands=response.data;
-      console.log(response.data);
-    }
-    )
+    })
   }
 }
