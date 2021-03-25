@@ -18,14 +18,14 @@ export class PaymentComponent implements OnInit {
   day: number = 0;
   startDate: Date;
   endDate: Date;
-  rental: Rental = { firstAndLastName: "", carId: 0, rentDate: null, returnDate: null, totalRentPrice: 0 }
+  rental: Rental = {CustomerId:0, FirstAndLastName: "", CarId: 0, RentDate: null, ReturnDate: null, TotalRentPrice: 0 }
   IsRentable:ResponseModel={message:".",success:false};
-  ResultRental:ResponseModel={message:"",success:false}
+  ResultRental:ResponseModel={message:".",success:false}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.getCarDetail(params["carId"]);
-      this.rental.carId = params["carId"];
+      this.rental.CarId =Number(params["carId"]);
     });
   }
   getCarDetail(carId: number) {
@@ -43,21 +43,21 @@ export class PaymentComponent implements OnInit {
       let startDay = Number.parseInt(startDate.getDate().toString())
       let startMonth = Number.parseInt(startDate.getMonth().toString())
       let startYear = Number.parseInt(startDate.getFullYear().toString())
-      let day = ((endDay - startDay) + ((endMonth - startMonth) * 30) + ((endYear - startYear) * 365) + 1);
+      let day = ((endDay - startDay) + ((endMonth - startMonth) * 30) + ((endYear - startYear) * 365));
       this.day = day;
       if (day > 0) {
-        this.rental.rentDate = this.startDate;
-        this.rental.returnDate = this.endDate;
-        this.rental.totalRentPrice = this.day * this.carDetail.dailyPrice;
+        this.rental.RentDate = this.startDate;
+        this.rental.ReturnDate = this.endDate;
+        this.rental.TotalRentPrice = this.day * this.carDetail.dailyPrice;
         this.IsRentablefuc();
       }
     }
   }
   IsRentablefuc() {
-    this.rentalService.IsRentable(this.rental.rentDate, this.rental.returnDate, this.rental.carId)
+    this.rentalService.IsRentable(this.rental.RentDate, this.rental.ReturnDate, this.rental.CarId)
     .subscribe(response=>this.IsRentable=response);
   }
   Rent(){
-    this.rentalService.Rent(this.rental).subscribe();
+    this.rentalService.Rent(this.rental).subscribe(result=>this.ResultRental=result);
   }
 }

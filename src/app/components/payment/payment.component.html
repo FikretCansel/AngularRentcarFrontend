@@ -24,22 +24,18 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Toplam Ücret (TL)</span>
-                    <strong *ngIf="day>0;else invalidprice">{{rental.totalRentPrice}}</strong>
+                    <strong *ngIf="day>0;else invalidprice">{{rental.TotalRentPrice}}</strong>
                     <ng-template #invalidprice><strong>Geçerli bir gün giriniz</strong></ng-template>
                 </li>
             </ul>
         </div>
-        <div class="col-md-8 order-md-1">
+        <div class="col-md-8 order-md-1" *ngIf="ResultRental.success==false && ResultRental.message==='.'">
             <h4 class="mb-3">Billing address</h4>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">FirstAndLast Name</label>
-                        <input [(ngModel)]="rental.firstAndLastName" type="text" class="form-control" id="firstandlastName" placeholder="Name" value=""
-                            required>
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
+                        <input [(ngModel)]="rental.FirstAndLastName" type="text" name="first">
                     </div>
                     <form class="list-group-item">
                         <label>Başlangıç tarihi</label><label style="margin-left: 95px;">Bitiş tarihi</label>
@@ -62,7 +58,7 @@
                 </div>
 
 
-                <div *ngIf="IsRentable.success">
+                <div *ngIf="IsRentable.success && day>0">
                     <h4 class="mb-3">Payment</h4>
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
@@ -118,4 +114,12 @@
                 </div>
             </form>
         </div>
+        <div class="alert alert-success" role="alert" *ngIf="ResultRental.success==true && ResultRental.message!=='.'">
+            {{ResultRental.message}}
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="ResultRental.success==false && ResultRental.message!=='.'">
+            {{ResultRental.message}}
+        </div>
     </div>
+    <div></div>
+</div>
