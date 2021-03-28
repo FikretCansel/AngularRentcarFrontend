@@ -1,0 +1,5 @@
+<form [formGroup]="colorAddForm" class="form-group col-md-8">
+    <label>Renk Adı</label>
+    <input class="form-control" formControlName="name" id="name" type="text" placeholder="Renk"/>
+    <button (click)="add()" class="form-control btn btn-success">Kaydet</button>
+</form>

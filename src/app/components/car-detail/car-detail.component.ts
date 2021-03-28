@@ -11,7 +11,7 @@ import { CarDetailService } from 'src/app/services/car-detail.service';
 })
 export class CarDetailComponent implements OnInit {
 
-  carDetail:CarDetail={brandName:"",carId:0,colorName:"",dailyPrice:0,description:"",carImages:[],modelYear:0,carName:""}
+  carDetail:CarDetail={colorId:0,brandId:0,brandName:"",carId:0,colorName:"",dailyPrice:0,description:"",carImages:[],modelYear:0,carName:""}
   ImageIndex=1;
   dataLoad=false;
   constructor(private carDetailService:CarDetailService,private activatedRoute:ActivatedRoute) { }

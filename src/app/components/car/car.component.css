@@ -25,3 +25,25 @@
 .filterButton{
     margin-top: 22px;
 }
+.carUpdateBox{
+    width: 40%;
+    position: absolute;
+    background: gray;
+    z-index: 1;
+}
+.updateForm{
+    margin-left: 10%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.carUpdateBox-header{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.closeUpdateButton{
+    padding: 15px;
+    background: saddlebrown;
+    cursor: pointer;
+}

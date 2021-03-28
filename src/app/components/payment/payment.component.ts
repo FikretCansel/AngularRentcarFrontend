@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Car } from 'src/app/models/car';
+import { Car } from 'src/app/models/carDto';
 import { Rental } from 'src/app/models/rental';
 import { ResponseModel } from 'src/app/models/ResponseModel';
 import { CarService } from 'src/app/services/car.service';
@@ -14,7 +14,7 @@ import { RentalService } from 'src/app/services/rental.service';
 export class PaymentComponent implements OnInit {
 
   constructor(private carService: CarService, private rentalService: RentalService, private activatedRoute: ActivatedRoute) { }
-  carDetail: Car = { brandName: "", carId: 0, colorName: "", dailyPrice: 0, description: "", modelYear: 0, carName: "" }
+  carDetail: Car = { brandId:0,colorId:0,brandName: "", carId: 0, colorName: "", dailyPrice: 0, description: "", modelYear: 0, carName: "" }
   day: number = 0;
   startDate: Date;
   endDate: Date;

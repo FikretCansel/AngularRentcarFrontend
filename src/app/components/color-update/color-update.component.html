@@ -1,0 +1,7 @@
+<form [formGroup]="colorUpdateForm" class="form-group col-md-8">
+    <label>Id</label>
+    <input class="form-control" formControlName="id" id="id" type="number" placeholder="id"/>
+    <label>Renk Adı</label>
+    <input class="form-control" formControlName="name" id="name" type="text" placeholder="Renk"/>
+    <button (click)="update()" class="form-control btn btn-success">Kaydet</button>
+</form>

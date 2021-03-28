@@ -1,0 +1,5 @@
+<form [formGroup]="brandAddForm" class="form-group col-md-8">
+    <label>Marka Adı</label>
+    <input class="form-control" formControlName="name" id="name" type="text" placeholder="Marka"/>
+    <button (click)="add()" class="form-control btn btn-success">Kaydet</button>
+</form>

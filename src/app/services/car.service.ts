@@ -2,23 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
-import { Car } from '../models/car';
+import { Car } from '../models/carDto';
 import { ClassResponseModel } from '../models/classResponseModel';
+import { ResponseModel } from '../models/ResponseModel';
+import { CarBase } from '../models/car';
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  apiUrl="https://localhost:44395/api/cars/getalldetails";
-
+  apiUrl="https://localhost:44395/api/cars";
+  getAllDetailsUrl="https://localhost:44395/api/cars/getalldetails"
   apiGetByBrandUrl="https://localhost:44395/api/cars/getbybrand?Id="
   apiGetByColorUrl="https://localhost:44395/api/cars/getbycolor?Id="
   paymentApiUrl="https://localhost:44395/api/cars/getonecardetails?id=";
 
+
   constructor(private httpClient:HttpClient) { }
 
   getCars():Observable<ListResponseModel<Car>>{
-    return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
+    return this.httpClient.get<ListResponseModel<Car>>(this.getAllDetailsUrl);
   }
   getCarsByBrand(brandId:number):Observable<ListResponseModel<Car>>{
     return this.httpClient.get<ListResponseModel<Car>>(this.apiGetByBrandUrl+brandId);
@@ -29,5 +32,10 @@ export class CarService {
   getPaymentCarDetail(carId:number):Observable<ClassResponseModel<Car>>{
     return this.httpClient.get<ClassResponseModel<Car>>(this.paymentApiUrl+carId);
   }
-  
+  add(car:CarBase):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"/add",car);
+  }
+  update(car:Car):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl+"/update",car);
+  }
 }

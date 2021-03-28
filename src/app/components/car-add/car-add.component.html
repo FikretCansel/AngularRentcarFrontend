@@ -1,0 +1,21 @@
+<form [formGroup]="carAddForm" class="form-group col-md-8">
+    <label>Araba Adı</label>
+    <input class="form-control" formControlName="name" id="carName" type="text" placeholder="Ad" />
+
+    <label>Marka Id</label>
+    <input class="form-control" formControlName="brandId" id="brandId" type="number" placeholder="Marka" />
+
+    <label>Renk Id</label>
+    <input class="form-control" formControlName="colorId" id="colorId" type="number" placeholder="Renk" />
+
+    <label>Model Yılı</label>
+    <input class="form-control" formControlName="modelYear" id="modelYear" type="number" placeholder="Model Yılı" />
+
+    <label>Fiyat</label>
+    <input class="form-control" formControlName="dailyPrice" id="dailyPrice" type="number" placeholder="Fiyat" />
+
+    <label>Açıklama</label>
+    <input class="form-control" formControlName="description" id="description" type="text" placeholder="Açıklama" />
+
+    <button (click)="add()" class="form-control btn btn-success">Kaydet</button>
+</form>
