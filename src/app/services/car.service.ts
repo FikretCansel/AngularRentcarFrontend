@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Car } from '../models/carDto';
-import { ClassResponseModel } from '../models/classResponseModel';
+import { ItemResponseModel } from '../models/itemResponseModel';
 import { ResponseModel } from '../models/ResponseModel';
 import { CarBase } from '../models/car';
 @Injectable({
@@ -29,8 +29,8 @@ export class CarService {
   getCarsByColor(colorId:number):Observable<ListResponseModel<Car>>{
     return this.httpClient.get<ListResponseModel<Car>>(this.apiGetByColorUrl+colorId);
   }
-  getPaymentCarDetail(carId:number):Observable<ClassResponseModel<Car>>{
-    return this.httpClient.get<ClassResponseModel<Car>>(this.paymentApiUrl+carId);
+  getPaymentCarDetail(carId:number):Observable<ItemResponseModel<Car>>{
+    return this.httpClient.get<ItemResponseModel<Car>>(this.paymentApiUrl+carId);
   }
   add(car:CarBase):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"/add",car);

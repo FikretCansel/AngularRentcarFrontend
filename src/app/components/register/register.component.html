@@ -1,0 +1,15 @@
+<body class="text-center">
+    <form [formGroup]="registerForm" class="form-signin">
+      <h1 class="h3 mb-3 font-weight-normal">Lütfen Kayıt Olunuz</h1>
+      <label for="inputFirstName" class="sr-only">Ad</label>
+      <input formControlName="firstName" type="text" id="inputFirstName" class="form-control" placeholder="Adınız" required autofocus>
+      <label for="inputLastName" class="sr-only">Soyad</label>
+      <input formControlName="lastName" type="text" id="inputLastName" class="form-control" placeholder="Soyadınız" required>
+      <label for="inputEmail" class="sr-only">E-Posta Adresi</label>
+      <input formControlName="email" type="email" id="inputEmail" class="form-control" placeholder="E-posta Adresi" required>
+      <label for="inputPassword" class="sr-only">Şifre</label>
+      <input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Şifre" required>
+      <button class="btn btn-lg btn-primary btn-block" (click)="register()">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+    </form>
+  </body>

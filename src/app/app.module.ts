@@ -11,7 +11,7 @@ import { BrandComponent } from './components/brand/brand.component';
 import { ColorComponent } from './components/color/color.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarComponent } from './components/car/car.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarPipePipe } from './pipe/car-pipe.pipe';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -23,6 +23,12 @@ import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
+import { SignOutComponent } from './components/sign-out/sign-out.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +48,13 @@ import { ColorUpdateComponent } from './components/color-update/color-update.com
     BrandAddComponent,
     CarUpdateComponent,
     BrandUpdateComponent,
-    ColorUpdateComponent  ],
+    ColorUpdateComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileUpdateComponent,
+    SignOutComponent,
+  
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -54,7 +66,10 @@ import { ColorUpdateComponent } from './components/color-update/color-update.com
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: 
+  [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

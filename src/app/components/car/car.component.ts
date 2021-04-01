@@ -16,7 +16,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarComponent implements OnInit {
 
-  updateCarClass:Car;
+  updateCarClass:Car={brandId:0,brandName:"",colorId:0,dailyPrice:0,carId:0,carName:"",colorName:"",description:"",modelYear:0};
   carUpdateScreenBool:boolean=false;
   cars:Car[]=[];
   brands:Brand[]=[];
@@ -47,18 +47,17 @@ export class CarComponent implements OnInit {
         this.getColors();
       }
     })
-    this.createCarUpdateForm();
   }
 
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
-      id:["",Validators.required],
-      name: ["", Validators.required],
-      brandId: ["",Validators.required],
-      colorId: ["", Validators.required],
-      modelYear: ["", Validators.required],
-      dailyPrice: ["", Validators.required],
-      description: ["", Validators.required]
+      id:[this.updateCarClass.carId,Validators.required],
+      name: [this.updateCarClass.carName, Validators.required],
+      brandId: [this.updateCarClass.brandId,Validators.required],
+      colorId: [this.updateCarClass.colorId, Validators.required],
+      modelYear: [this.updateCarClass.modelYear, Validators.required],
+      dailyPrice: [this.updateCarClass.dailyPrice, Validators.required],
+      description: [this.updateCarClass.description, Validators.required]
     });
   }
 
@@ -87,8 +86,9 @@ export class CarComponent implements OnInit {
 
   openUpdateScreen(car:Car){
     this.updateCarClass=car;
-    console.log(this.updateCarClass);
     this.carUpdateScreenBool=true;
+    console.log(this.updateCarClass);
+    this.createCarUpdateForm();
   }
 
   getCars(){
