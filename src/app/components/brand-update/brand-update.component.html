@@ -1,6 +1,6 @@
 <form [formGroup]="brandUpdateForm" class="form-group col-md-8">
     <label>Id</label>
-    <input class="form-control" formControlName="id" id="id" type="number" placeholder="Marka"/>
+    <input class="form-control" formControlName="id" id="id" type="number" placeholder="Marka" value="{{id}}"/>
     <label>Marka Adı</label>
     <input class="form-control" formControlName="name" id="name" type="text" placeholder="Marka"/>
     <button (click)="update()" class="form-control btn btn-success">Kaydet</button>

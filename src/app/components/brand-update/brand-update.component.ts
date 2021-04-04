@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -11,14 +12,19 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandUpdateComponent implements OnInit {
 
   brandUpdateForm:FormGroup;
-  constructor(private formBuilder:FormBuilder,private brandService:BrandService,private toastrService:ToastrService) { }
+  id:number;
+
+  constructor(private activatedRoute:ActivatedRoute,private formBuilder:FormBuilder,private brandService:BrandService,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params=>{
+      this.id=params["id"];
+    });
     this.createBrandUpdateForm();
   }
   createBrandUpdateForm() {
     this.brandUpdateForm = this.formBuilder.group({
-      id: ["", Validators.required],
+      id: [this.id, Validators.required],
       name: ["", Validators.required],
     });
   }

@@ -1,9 +1,15 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/carDto';
+import { CreditCardModel } from 'src/app/models/creditCardModel';
 import { Rental } from 'src/app/models/rental';
 import { ResponseModel } from 'src/app/models/ResponseModel';
 import { CarService } from 'src/app/services/car.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -13,25 +19,52 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor(private carService: CarService, private rentalService: RentalService, private activatedRoute: ActivatedRoute) { }
+  constructor(private creditCardService:CreditCardService,private localStorageService:LocalStorageService,private toastrService:ToastrService,private formBuilder:FormBuilder,private carService: CarService, private rentalService: RentalService, private activatedRoute: ActivatedRoute) { }
   carDetail: Car = { brandId:0,colorId:0,brandName: "", carId: 0, colorName: "", dailyPrice: 0, description: "", modelYear: 0, carName: "" }
   day: number = 0;
   startDate: Date;
   endDate: Date;
-  rental: Rental = {CustomerId:0, FirstAndLastName: "", CarId: 0, RentDate: null, ReturnDate: null, TotalRentPrice: 0 }
+  rental: Rental = {UserId:this.localStorageService.getCustomerNo(), CarId: 0, RentDate: null, ReturnDate: null, TotalRentPrice: 0 }
   IsRentable:ResponseModel={message:".",success:false};
   ResultRental:ResponseModel={message:".",success:false}
 
+
+  CreditCardForm:FormGroup;
+  saveCardBool:boolean;
+
+  myCards:CreditCardModel[]=[];
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.getCarDetail(params["carId"]);
       this.rental.CarId =Number(params["carId"]);
     });
+    this.createCreditCardForm();
+    this.getMyCreditCards();
+  }
+
+  createCreditCardForm(){
+    this.CreditCardForm=this.formBuilder.group({
+        userId:[this.localStorageService.getCustomerNo(),Validators.required],
+        cardHolderName:["",Validators.required],
+        cardNumber:["",Validators.required],
+        cvv:["",Validators.required],
+        validThruMonth:["",Validators.required],
+        validThruYear:["",Validators.required]
+    });
+  }
+  changeSaveCardStatus(){
+    this.saveCardBool=!this.saveCardBool;
   }
   getCarDetail(carId: number) {
     this.carService.getPaymentCarDetail(carId).subscribe((response => {
       this.carDetail = response.data
     }));
+  }
+  getMyCreditCards(){
+    this.creditCardService.getMyCreditCards().subscribe((response)=>{
+      this.myCards=response.data
+      console.log(this.myCards);
+    });
   }
   calculatePrice() {
     if (this.startDate && this.endDate) {
@@ -58,6 +91,16 @@ export class PaymentComponent implements OnInit {
     .subscribe(response=>this.IsRentable=response);
   }
   Rent(){
+    if(this.CreditCardForm.valid){
+      if(this.saveCardBool){
+        console.log("kart kaydedildi");
+        this.creditCardService.saveCreditCard(this.CreditCardForm.value).subscribe();
+      }
+      this.rentalService.Rent(this.rental).subscribe(result=>this.ResultRental=result);
+    }
+    else this.toastrService.error("Kredi kartı bilgileriniz eksik","Eksik")
+  }
+  RentWithSavedCard(card:CreditCardModel){
     this.rentalService.Rent(this.rental).subscribe(result=>this.ResultRental=result);
   }
 }

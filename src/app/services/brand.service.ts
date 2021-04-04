@@ -22,4 +22,7 @@ export class BrandService {
   update(brand:Brand):Observable<ResponseModel>{
     return this.httpClient.put<ResponseModel>(this.apiUrl+"update",brand);
   }
+  delete(brandId:number):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"delete",{id:brandId});
+  }
 }

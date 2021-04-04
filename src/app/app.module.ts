@@ -16,7 +16,6 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarPipePipe } from './pipe/car-pipe.pipe';
 import { PaymentComponent } from './components/payment/payment.component';
 import { BrandPipePipe } from './pipe/brand-pipe.pipe';
-import { RentResultComponent } from './rent-result/rent-result.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
@@ -28,6 +27,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { SignOutComponent } from './components/sign-out/sign-out.component';
+import { ExpirationInterceptor } from './interceptors/expiration.interceptor';
+import { BrandsPageComponent } from './components/brands-page/brands-page.component';
+import { ColorsPageComponent } from './components/colors-page/colors-page.component';
 
 
 @NgModule({
@@ -42,7 +44,6 @@ import { SignOutComponent } from './components/sign-out/sign-out.component';
     CarPipePipe,
     PaymentComponent,
     BrandPipePipe,
-    RentResultComponent,
     CarAddComponent,
     ColorAddComponent,
     BrandAddComponent,
@@ -53,6 +54,8 @@ import { SignOutComponent } from './components/sign-out/sign-out.component';
     RegisterComponent,
     ProfileUpdateComponent,
     SignOutComponent,
+    BrandsPageComponent,
+    ColorsPageComponent
   
   ],
   imports: [
@@ -68,7 +71,8 @@ import { SignOutComponent } from './components/sign-out/sign-out.component';
   ],
   providers: 
   [
-    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:ExpirationInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

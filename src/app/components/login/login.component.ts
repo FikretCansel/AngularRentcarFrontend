@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
 
-  constructor(private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService,private authService:AuthService) { }
+  constructor(private localStorage:LocalStorageService,private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.createAddForm();
@@ -29,13 +30,9 @@ export class LoginComponent implements OnInit {
   login(){
     if(this.loginForm.valid){
       let loginModel=this.loginForm.value;
-      console.log(loginModel);
       this.authService.login(loginModel).subscribe((response)=>{
         this.toastrService.success(response.message,"Başarılı");
-        localStorage.setItem("token",response.data.token);
-        localStorage.setItem("expiration",response.data.expiration);
-        localStorage.setItem("name",response.data.firstName+" "+response.data.lastName);
-        console.log(response);
+        this.localStorage.set(response.data);
         this.router.navigate(["/"]);
       },responseError=>{
         this.toastrService.error(responseError.error.message,"Hata");

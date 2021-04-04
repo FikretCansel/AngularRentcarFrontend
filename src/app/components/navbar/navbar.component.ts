@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +10,21 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
 
   IsAuthenticated:boolean=false;
-  Name:string="a";
-
-  constructor(private authService:AuthService) { }
+  firtName:string="";
+  fullName:string="";
+  constructor(private localStorage:LocalStorageService) { }
 
   ngOnInit(): void {
     this.getName();
   }
 
   getName(){
-    this.Name=localStorage.getItem("name");
-    if(localStorage.getItem("name")){
-      this.IsAuthenticated=true;
-    }
+    this.firtName=this.localStorage.getFirtName();
+    this.fullName=this.localStorage.getFirstAndLastName();
+    this.IsAuthenticated=this.localStorage.isAuthenticated();
+  }
+  signOut(){
+    this.localStorage.signOut();
   }
 
 }

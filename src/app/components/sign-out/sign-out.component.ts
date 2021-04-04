@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-sign-out',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class SignOutComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private localStorageService:LocalStorageService,private router:Router) { }
+
+  userName:string=this.localStorageService.getFirstAndLastName();
 
   ngOnInit(): void {
   }

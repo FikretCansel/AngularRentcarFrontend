@@ -38,7 +38,4 @@ export class CarDetailComponent implements OnInit {
     if(this.ImageIndex>1)
     this.ImageIndex--;
   }
-  updateScreen(){
-    
-  }
 }

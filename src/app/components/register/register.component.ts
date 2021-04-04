@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm:FormGroup;
   
-  constructor(private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService,private authService:AuthService) { }
+  constructor(private localStorage:LocalStorageService,private router:Router,private formBuilder:FormBuilder,private toastrService:ToastrService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -33,8 +34,7 @@ export class RegisterComponent implements OnInit {
       console.log(registerModel);
       this.authService.register(registerModel).subscribe((response)=>{
         this.toastrService.success(response.message,"Başarılı");
-        console.log(response);
-        localStorage.setItem("token",response.data.token);
+        this.localStorage.set(response.data);
         this.router.navigate(["/"]);
       },responseError=>{
         this.toastrService.error(responseError.error.message,"Hata");

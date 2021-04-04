@@ -12,9 +12,9 @@ import { CarBase } from '../models/car';
 export class CarService {
 
   apiUrl="https://localhost:44395/api/cars";
-  getAllDetailsUrl="https://localhost:44395/api/cars/getalldetails"
-  apiGetByBrandUrl="https://localhost:44395/api/cars/getbybrand?Id="
-  apiGetByColorUrl="https://localhost:44395/api/cars/getbycolor?Id="
+  getAllDetailsUrl="https://localhost:44395/api/cars/getalldetails";
+  apiGetByBrandUrl="https://localhost:44395/api/cars/getbybrand?Id=";
+  apiGetByColorUrl="https://localhost:44395/api/cars/getbycolor?Id=";
   paymentApiUrl="https://localhost:44395/api/cars/getonecardetails?id=";
 
 

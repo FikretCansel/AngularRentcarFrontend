@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart</span>
+                <span class="text-muted">Araba Bilgileri</span>
                 <span class="badge badge-secondary badge-pill">3</span>
             </h4>
             <ul class="list-group mb-3">
@@ -30,13 +30,9 @@
             </ul>
         </div>
         <div class="col-md-8 order-md-1" *ngIf="ResultRental.success==false && ResultRental.message==='.'">
-            <h4 class="mb-3">Billing address</h4>
+            <h4 class="mb-3">Ödeme</h4>
             <form class="needs-validation">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="firstName">FirstAndLast Name</label>
-                        <input [(ngModel)]="rental.FirstAndLastName" type="text" name="first">
-                    </div>
                     <form class="list-group-item">
                         <label>Başlangıç tarihi</label><label style="margin-left: 95px;">Bitiş tarihi</label>
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -59,58 +55,103 @@
 
 
                 <div *ngIf="IsRentable.success && day>0">
-                    <h4 class="mb-3">Payment</h4>
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked
-                                required>
-                            <label class="custom-control-label" for="credit">Credit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="debit">Debit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="paypal">Paypal</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-name">Name on card</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                            <small class="text-muted">Full name as displayed on card</small>
-                            <div class="invalid-feedback">
-                                Name on card is required
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-number">Credit card number</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Credit card number is required
-                            </div>
+
+
+
+                    <div class="card">
+                        <h4 class="card-header">Kayıtlı Kartlarım ile Öde</h4>
+                        <div class="card-body">
+
+
+
+                            <table *ngIf="myCards.length;else nonsave" class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Kart Sahibi</th>
+                                    <th scope="col">Kart Numarası</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let card of myCards">
+                                    <td>{{card.cardHolderName}}</td>
+                                    <td>{{card.cardNumber}}</td>
+                                    <td><button (click)="RentWithSavedCard(card)"
+                                            class="btn btn-primary">Bu Kart ile öde</button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <ng-template #nonsave><div class="alert alert-secondary">
+                                <p>Kayıtlı Kartınız Bulunamadı</p>
+                              </div>
+                            </ng-template>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Expiration</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Expiration date required
+
+
+                    <div class="card">
+                    <h4 class="mb-3 card-header">Yeni Kart ile öde</h4>
+                    <form class="card-body" [formGroup]="CreditCardForm">
+                        <div class="form-check form-switch">
+                            <input (change)="changeSaveCardStatus()" class="form-check-input" type="checkbox"
+                                id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Kart bilgilerimi sonra
+                                kullanmak üzere kaydet</label>
+                        </div>
+                        <div class="d-block my-3">
+                            <h6>Ödeme Yöntemleri</h6>
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
+                                    checked required>
+                                <label class="custom-control-label" for="credit">Kredi Kart</label>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Security code required
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">Kartın üstündeki isim</label>
+                                <input formControlName="cardHolderName" type="text" class="form-control" id="cc-name"
+                                    placeholder="" required>
+                                <small class="text-muted">Kartın üstündeki tam ad</small>
+                                <div class="invalid-feedback">
+                                    gereklidir
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">Kart Numarası</label>
+                                <input formControlName="cardNumber" type="text" class="form-control" id="cc-number"
+                                    placeholder="" required>
+                                <small class="text-muted">Kart Numarası gereklidir</small>
                             </div>
                         </div>
-                    </div>
-                    <hr class="mb-4">
-                    <button (click)="Rent()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
-                        checkout</button>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Ay</label>
+                                <input formControlName="validThruMonth" type="number" class="form-control"
+                                    id="cc-expirationMonth" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Son Kullanım Ayı
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Yıl</label>
+                                <input formControlName="validThruYear" type="number" class="form-control"
+                                    id="cc-expirationYear" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Son Kullanm Yılı
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Cvv</label>
+                                <input formControlName="cvv" type="number" class="form-control" id="cc-cvv"
+                                    placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Güvenlik Kodu
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <button (click)="Rent()" class="btn btn-primary btn-lg btn-block" type="submit">Ödemeye Devam Et</button>
+                    </form>
+                </div>
                 </div>
             </form>
         </div>

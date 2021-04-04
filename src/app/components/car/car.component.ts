@@ -65,7 +65,6 @@ export class CarComponent implements OnInit {
   update() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
-      console.log(carModel);
       this.carService.update(carModel).subscribe((response) => {
         this.toastrService.success(response.message, "Başarılı");
       }, responseError => {
@@ -87,7 +86,6 @@ export class CarComponent implements OnInit {
   openUpdateScreen(car:Car){
     this.updateCarClass=car;
     this.carUpdateScreenBool=true;
-    console.log(this.updateCarClass);
     this.createCarUpdateForm();
   }
 
@@ -95,7 +93,6 @@ export class CarComponent implements OnInit {
     this.carService.getCars().subscribe((response=>{
       this.cars=response.data;
       this.dataLoaded=true;
-      console.log(response.data);
     }));
   }
   getCarsByBrand(brandId:number){
@@ -118,7 +115,6 @@ export class CarComponent implements OnInit {
   getColors(){
     this.colorService.getColorsService().subscribe((response)=>{
       this.colors=response.data;
-      console.log(response.data);
     })
   }
 

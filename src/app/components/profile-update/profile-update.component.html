@@ -1,1 +1,16 @@
-<p>profile-update works!</p>
+<body class="text-center">
+    <div class="card">
+        <div class="card-header">Ad Soyad Güncelle</div>
+        <div class="card-body">
+            <form [formGroup]="profileForm">
+                <label for="inputFirstName" class="sr-only">Adınız</label>
+                <input formControlName="firstName" type="text" id="inputEmail" class="form-control"
+                    placeholder="Ad" required autofocus>
+                <label for="inputLastName" class="sr-only">Soyisminiz</label>
+                <input formControlName="lastName" type="text" id="inputLastName" class="form-control"
+                    placeholder="Soyad" required>
+                <button class="btn btn-lg btn-primary btn-block" (click)="update()">Güncelle</button>
+            </form>
+        </div>
+    </div>
+</body>
