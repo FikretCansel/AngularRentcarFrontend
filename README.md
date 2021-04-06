@@ -8,7 +8,8 @@ Ana Ekran => Kiralanabilir Araçlar ve Özellikleri ve bu sayfadan kiralama ve d
 
 Araç güncellemek açılan menü
 
-![image](https://user-images.githubusercontent.com/61146337/113762394-342cd380-9721-11eb-835f-736196f1f3fa.png)
+![image](https://user-images.githubusercontent.com/61146337/113788670-3190a500-9746-11eb-82b5-a521f836419b.png)
+
 
 
 Detaylar Sayfası => Bu sayfada araçların fotograflarını ve detaylarını görebilir dilersek kiralama sayfasına gidebiliriz.
