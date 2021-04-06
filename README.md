@@ -59,7 +59,9 @@ Marka ve Renk güncelleme sayfaları bu şekildedir
 
 Backendden gelen (10dk) lık süre bittiginde otomatik çıkış yaparak login sayfasına yönlendirmektedir. Suan ekran görüntüsü için sürenin bitmesini bekliyorum :))
 
+![image](https://user-images.githubusercontent.com/61146337/113762917-c3d28200-9721-11eb-9f91-42cd92abb513.png)
 
+Tasarımsal ve işlevsel geliştirmeler devam etmektedir...
 
 
 
