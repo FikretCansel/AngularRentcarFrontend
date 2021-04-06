@@ -24,34 +24,55 @@
     </div>
 </div>
 
-<div *ngIf="carUpdateScreenBool" class="carUpdateBox card">
-    <div class="carUpdateBox-header">
-       <h6 (click)="closeUpdate()" class="closeUpdateButton">X</h6>
-    </div>
-    <form [formGroup]="carUpdateForm" class="form-group col-md-8 updateForm">
-        <label>Id</label>
-        <input class="form-control" formControlName="id" id="id" type="number" placeholder="Id" value="{{updateCarClass.carId}}">
-        <label>Araba Adı</label>
-        <input class="form-control" formControlName="name" id="carName" type="text" placeholder="Ad" value="{{updateCarClass.carName}}">
-    
-        <label>Marka Id</label>
-        <input class="form-control" formControlName="brandId" id="brandId" type="number" placeholder="Marka" value="{{updateCarClass.brandId}}" />
-    
-        <label>Model Yılı</label>
-        <input class="form-control" formControlName="modelYear" id="modelYear" type="number" placeholder="Model Yılı" value="{{updateCarClass.modelYear}}" />
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel" style="    margin-left: 180px;">Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color:black">
+                <div class="card-body">
 
-        <label>Renk Id</label>
-        <input class="form-control" formControlName="colorId" id="colorId" type="number" placeholder="Renk Id" value="{{updateCarClass.colorId}}" />
-    
-        <label>Fiyat</label>
-        <input class="form-control" formControlName="dailyPrice" id="dailyPrice" type="number" placeholder="Fiyat" value="{{updateCarClass.dailyPrice}}" />
-    
-        <label>Açıklama</label>
-        <input class="form-control" formControlName="description" id="description" type="text" placeholder="Açıklama" value="{{updateCarClass.description}}" />
-    
-        <button (click)="update()" class="form-control btn btn-success">Kaydet</button>
-    </form>
+
+                    <form [formGroup]="carUpdateForm">
+                        <label>Id</label>
+                        <input class="form-control" formControlName="id" id="id" type="number" placeholder="Id"
+                            value="{{updateCarClass.carId}}">
+                        <label>Araba Adı</label>
+                        <input class="form-control" formControlName="name" id="carName" type="text" placeholder="Ad"
+                            value="{{updateCarClass.carName}}">
+
+                        <label>Marka Id</label>
+                        <input class="form-control" formControlName="brandId" id="brandId" type="number"
+                            placeholder="Marka" value="{{updateCarClass.brandId}}" />
+
+                        <label>Model Yılı</label>
+                        <input class="form-control" formControlName="modelYear" id="modelYear" type="number"
+                            placeholder="Model Yılı" value="{{updateCarClass.modelYear}}" />
+
+                        <label>Renk Id</label>
+                        <input class="form-control" formControlName="colorId" id="colorId" type="number"
+                            placeholder="Renk Id" value="{{updateCarClass.colorId}}" />
+
+                        <label>Fiyat</label>
+                        <input class="form-control" formControlName="dailyPrice" id="dailyPrice" type="number"
+                            placeholder="Fiyat" value="{{updateCarClass.dailyPrice}}" />
+
+                        <label>Açıklama</label>
+                        <input class="form-control" formControlName="description" id="description" type="text"
+                            placeholder="Açıklama" value="{{updateCarClass.description}}" />
+
+                        <button (click)="update()" class="form-control btn btn-success">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
 
 
 
@@ -70,7 +91,8 @@
         <div class="carBox-header">
             <h3>{{car.brandName}}</h3>
             <div>
-                <button (click)="openUpdateScreen(car)" class="btn btn-secondary">Güncelle</button>
+                <button class="btn btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#updateModal" (click)="updateCarClassBtn(car)">Güncelle</button>
                 <button routerLink="/cars/detail/{{car.carId}}" class="btn btn-secondary carButton">Detaylar</button>
                 <button class="btn btn-success carButton" routerLink="/payment/{{car.carId}}">Kirala</button>
             </div>

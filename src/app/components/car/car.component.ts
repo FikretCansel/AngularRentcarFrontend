@@ -33,20 +33,21 @@ export class CarComponent implements OnInit {
     this.activatedRoute.params.subscribe((params)=>{
       if(params["brandId"]){
         this.getCarsByBrand(params["brandId"]);
-        this.getBrands();
-        this.getColors();
       }
       else if(params["colorId"]){
         this.getCarsByColor(params["colorId"]);
-        this.getBrands();
-        this.getColors();
       }
       else{
+        this.createCarUpdateForm();
         this.getCars();
-        this.getBrands();
-        this.getColors();
       }
     })
+    this.getBrands();
+    this.getColors();
+  }
+  updateCarClassBtn(car:Car){
+    this.updateCarClass=car;
+    this.createCarUpdateForm();
   }
 
   createCarUpdateForm() {
@@ -61,8 +62,8 @@ export class CarComponent implements OnInit {
     });
   }
 
-
   update() {
+    console.log(this.carUpdateForm.value);
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
       this.carService.update(carModel).subscribe((response) => {
@@ -78,16 +79,6 @@ export class CarComponent implements OnInit {
     else this.toastrService.error("Formunuz eksik", "Dikkat");
   }
 
-  closeUpdate(){
-    this.carUpdateScreenBool=false;
-  }
-
-
-  openUpdateScreen(car:Car){
-    this.updateCarClass=car;
-    this.carUpdateScreenBool=true;
-    this.createCarUpdateForm();
-  }
 
   getCars(){
     this.carService.getCars().subscribe((response=>{

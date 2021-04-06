@@ -9,10 +9,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class NavbarComponent implements OnInit {
 
-  IsAuthenticated:boolean=false;
   firtName:string="";
   fullName:string="";
-  constructor(private localStorage:LocalStorageService) { }
+  constructor(public localStorage:LocalStorageService) { }
 
   ngOnInit(): void {
     this.getName();
@@ -21,7 +20,6 @@ export class NavbarComponent implements OnInit {
   getName(){
     this.firtName=this.localStorage.getFirtName();
     this.fullName=this.localStorage.getFirstAndLastName();
-    this.IsAuthenticated=this.localStorage.isAuthenticated();
   }
   signOut(){
     this.localStorage.signOut();
