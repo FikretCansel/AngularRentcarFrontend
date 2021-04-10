@@ -49,7 +49,7 @@ Hesaba giriş yapma ve kayıt olma ve çıkış yapma
 
 ![image](https://user-images.githubusercontent.com/61146337/113761183-d21f9e80-971f-11eb-8e19-d44324cacb93.png)
 
-Kullanıcı hali hazırda giriş yapmış durumda ise yönlendirilen singout sayfası
+Kullanıcı register ve login sayfasına erişmek ister ise ve hali hazırda giriş yapmış durumda ise yönlendirilen singout sayfası
 
 ![image](https://user-images.githubusercontent.com/61146337/113761464-29257380-9720-11eb-9880-722661db5f98.png)
 
