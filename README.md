@@ -32,10 +32,12 @@ Kredi Kartı kaydedebilir ve dilersek kayıtlı kredi kartı ile ödeme gerçekl
 
 Markaya veya Renge göre filitreleme 
 
-![image](https://user-images.githubusercontent.com/61146337/113760350-c7b0d500-971e-11eb-8b8c-7b2baa49a10e.png)
+![image](https://user-images.githubusercontent.com/61146337/114286107-914bc080-9a64-11eb-92eb-3ce1909f28dc.png)
+
 
 Profil Menüsü
-![image](https://user-images.githubusercontent.com/61146337/113760589-0fcff780-971f-11eb-80bf-870959d5903b.png)
+![image](https://user-images.githubusercontent.com/61146337/114286055-4336bd00-9a64-11eb-92e4-dde37f92c0ab.png)
+
 
 Profil Düzenleme Ekranı (Not : Email ve Şifre düzenlemede yakında eklenecektir.)
 ![image](https://user-images.githubusercontent.com/61146337/113760661-2aa26c00-971f-11eb-8c57-23c2d91f85f1.png)
