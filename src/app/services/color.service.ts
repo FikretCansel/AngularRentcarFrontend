@@ -22,4 +22,7 @@ export class ColorService {
   update(color:Color):Observable<ResponseModel>{
     return this.httpClient.put<ResponseModel>(this.apiUrl+"update",color);
   }
+  delete(colorId:number):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"delete",{id:colorId});
+  }
 }

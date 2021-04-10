@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -10,14 +11,18 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorUpdateComponent implements OnInit {
   colorUpdateForm:FormGroup;
-  constructor(private formBuilder:FormBuilder,private colorService:ColorService,private toastrService:ToastrService) { }
+  id:number;
+  constructor(private activatedRoute:ActivatedRoute,private formBuilder:FormBuilder,private colorService:ColorService,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params=>{
+      this.id=params["id"];
+    });
     this.createColorUpdateForm();
   }
   createColorUpdateForm() {
     this.colorUpdateForm = this.formBuilder.group({
-      id: ["", Validators.required],
+      id: [this.id, Validators.required],
       name: ["", Validators.required],
     });
   }

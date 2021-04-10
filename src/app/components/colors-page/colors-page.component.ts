@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -9,7 +10,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorsPageComponent implements OnInit {
 
-  constructor(private colorService:ColorService) { }
+  constructor(private toastrService:ToastrService,private colorService:ColorService) { }
 
   colors:Color[]=[];
 
@@ -21,6 +22,15 @@ export class ColorsPageComponent implements OnInit {
     this.colorService.getColorsService().subscribe((response)=>{
       this.colors=response.data
     });
+  }
+  delete(colorId:number){
+    this.colorService.delete(colorId).subscribe((response)=>{
+      this.toastrService.success(response.message);
+    },
+    responseError=>{
+      this.toastrService.error("Hata");
+    }
+    );
   }
 
 }

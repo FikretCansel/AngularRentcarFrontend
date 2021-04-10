@@ -3,12 +3,15 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Renk</th>
+        <th><button class="btn btn-info" routerLink="/color/add">Renk Ekle</button></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let color of colors">
         <th scope="row">{{color.id}}</th>
         <td>{{color.name}}</td>
+        <td><button class="btn btn-info" routerLink="/color/update/{{color.id}}">Güncelle</button></td>
+        <td><button class="btn btn-info" (click)="delete(color.id)">Sil</button></td>
       </tr>
       
     </tbody>
