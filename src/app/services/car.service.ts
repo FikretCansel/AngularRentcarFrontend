@@ -38,4 +38,7 @@ export class CarService {
   update(car:Car):Observable<ResponseModel>{
     return this.httpClient.put<ResponseModel>(this.apiUrl+"/update",car);
   }
+  filter(brandId:number,colorId:number):Observable<ListResponseModel<Car>>{
+    return this.httpClient.get<ListResponseModel<Car>>(`${this.apiUrl}/getbybrandandcolor?brandId=${brandId}&colorId=${colorId}`);
+  }
 }

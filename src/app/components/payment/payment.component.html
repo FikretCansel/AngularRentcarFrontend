@@ -24,7 +24,7 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Toplam Ücret (TL)</span>
-                    <strong *ngIf="day>0;else invalidprice">{{rental.TotalRentPrice}}</strong>
+                    <strong *ngIf="day>0;else invalidprice">{{rental.totalRentPrice}}</strong>
                     <ng-template #invalidprice><strong>Geçerli bir gün giriniz</strong></ng-template>
                 </li>
             </ul>

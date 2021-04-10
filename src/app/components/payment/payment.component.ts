@@ -24,7 +24,7 @@ export class PaymentComponent implements OnInit {
   day: number = 0;
   startDate: Date;
   endDate: Date;
-  rental: Rental = {UserId:this.localStorageService.getCustomerNo(), CarId: 0, RentDate: null, ReturnDate: null, TotalRentPrice: 0 }
+  rental: Rental = {userId:this.localStorageService.getCustomerNo(), carId: 0, rentDate: null, returnDate: null, totalRentPrice: 0 }
   IsRentable:ResponseModel={message:".",success:false};
   ResultRental:ResponseModel={message:".",success:false}
 
@@ -36,7 +36,7 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.getCarDetail(params["carId"]);
-      this.rental.CarId =Number(params["carId"]);
+      this.rental.carId =Number(params["carId"]);
     });
     this.createCreditCardForm();
     this.getMyCreditCards();
@@ -63,7 +63,6 @@ export class PaymentComponent implements OnInit {
   getMyCreditCards(){
     this.creditCardService.getMyCreditCards().subscribe((response)=>{
       this.myCards=response.data
-      console.log(this.myCards);
     });
   }
   calculatePrice() {
@@ -79,21 +78,20 @@ export class PaymentComponent implements OnInit {
       let day = ((endDay - startDay) + ((endMonth - startMonth) * 30) + ((endYear - startYear) * 365));
       this.day = day;
       if (day > 0) {
-        this.rental.RentDate = this.startDate;
-        this.rental.ReturnDate = this.endDate;
-        this.rental.TotalRentPrice = this.day * this.carDetail.dailyPrice;
+        this.rental.rentDate = this.startDate;
+        this.rental.returnDate = this.endDate;
+        this.rental.totalRentPrice = this.day * this.carDetail.dailyPrice;
         this.IsRentablefuc();
       }
     }
   }
   IsRentablefuc() {
-    this.rentalService.IsRentable(this.rental.RentDate, this.rental.ReturnDate, this.rental.CarId)
+    this.rentalService.IsRentable(this.rental.rentDate, this.rental.returnDate, this.rental.carId)
     .subscribe(response=>this.IsRentable=response);
   }
   Rent(){
     if(this.CreditCardForm.valid){
       if(this.saveCardBool){
-        console.log("kart kaydedildi");
         this.creditCardService.saveCreditCard(this.CreditCardForm.value).subscribe();
       }
       this.rentalService.Rent(this.rental).subscribe(result=>this.ResultRental=result);

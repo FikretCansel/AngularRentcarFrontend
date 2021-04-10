@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/ResponseModel';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,10 @@ export class RentalService {
 
   rentApiUrl="https://localhost:44395/api/rentals/CheckRentableAndRental";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private localStorageService:LocalStorageService,private httpClient:HttpClient) { }
 
   getRental():Observable<ListResponseModel<Rental>>{
-    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl+"getAllRentalDetails");
+    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl+"getuserental/?UserId="+this.localStorageService.getCustomerNo());
   }
 
   IsRentable(rentDate:Date,returnDate:Date,carId:number):Observable<ResponseModel>{

@@ -1,4 +1,6 @@
+
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthResultModel } from '../models/authResultModel';
 
 @Injectable({
@@ -6,7 +8,7 @@ import { AuthResultModel } from '../models/authResultModel';
 })
 export class LocalStorageService {
 
-  constructor() { }
+  constructor(private route:Router) { }
 
 
   set(response:AuthResultModel){
@@ -50,5 +52,6 @@ export class LocalStorageService {
   }
   signOut(){
     localStorage.clear();
+    this.route.navigate(["/"]);
   }
 }

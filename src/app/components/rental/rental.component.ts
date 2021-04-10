@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { Rental } from 'src/app/models/rental';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -10,7 +11,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalComponent implements OnInit {
 
-  rentals:Rental[]=[];
+  listRentals:ListResponseModel<Rental>;
   dataLoaded=false;
 
   constructor(private rentalService:RentalService) { }
@@ -20,7 +21,7 @@ export class RentalComponent implements OnInit {
   }
   getRentals(){
      this.rentalService.getRental().subscribe((response)=>{
-      this.rentals=response.data;
+      this.listRentals=response;
       this.dataLoaded=true;
      });
   }

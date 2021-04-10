@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/carDto';
@@ -24,24 +24,27 @@ export class CarComponent implements OnInit {
   dataLoaded=false;
   filterText="";
 
-  carUpdateForm: FormGroup
+  carUpdateForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,private colorService:ColorService,private brandService:BrandService,private carService:CarService,private activatedRoute:ActivatedRoute) { }
+  filterForm:FormGroup;
+
+  constructor(private route:Router,private formBuilder: FormBuilder, private toastrService: ToastrService,private colorService:ColorService,private brandService:BrandService,private carService:CarService,private activatedRoute:ActivatedRoute) { }
 
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params)=>{
       if(params["brandId"]){
-        this.getCarsByBrand(params["brandId"]);
+        this.getCarsByBrand(parseInt(params["brandId"]));
       }
       else if(params["colorId"]){
-        this.getCarsByColor(params["colorId"]);
+        this.getCarsByColor(parseInt(params["colorId"]));
       }
       else{
-        this.createCarUpdateForm();
         this.getCars();
       }
     })
+    this.createFilterForm();
+    this.createCarUpdateForm();
     this.getBrands();
     this.getColors();
   }
@@ -60,6 +63,18 @@ export class CarComponent implements OnInit {
       dailyPrice: [this.updateCarClass.dailyPrice, Validators.required],
       description: [this.updateCarClass.description, Validators.required]
     });
+  }
+  createFilterForm() {
+    this.filterForm = this.formBuilder.group({
+      colorIdFil:[0],
+      brandIdFil: [0],
+    });
+  }
+  filter(){
+    let form=this.filterForm.value;
+      this.carService.filter(form.brandIdFil,form.colorIdFil).subscribe((response)=>{
+        this.cars=response.data;
+      });
   }
 
   update() {

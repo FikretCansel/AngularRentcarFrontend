@@ -19,7 +19,7 @@ import { BrandsPageComponent } from './components/brands-page/brands-page.compon
 import { ColorsPageComponent } from './components/colors-page/colors-page.component';
 
 const routes: Routes = [
-  {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
+  {path:"car/add",component:CarAddComponent,canActivate:[LoginGuard]},
   {path:"color/add",component:ColorAddComponent,canActivate:[LoginGuard]},
   {path:"brand/add",component:BrandAddComponent,canActivate:[LoginGuard]},
   {path:"color/update/:id",component:ColorUpdateComponent,canActivate:[LoginGuard]},

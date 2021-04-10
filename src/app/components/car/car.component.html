@@ -1,28 +1,30 @@
-<div class="form-group">
+<form class="form-group" [formGroup]="filterForm">
     <div class="row">
         <div class="col-md-3">
             <label for="sel1">Marka Seçiniz:</label>
-            <select class="form-control" id="sel1">
-                <option>Fark Etmez</option>
-                <option *ngFor="let brand of brands">{{brand.name}}</option>
+            <select class="form-control" id="sel1" formControlName="brandIdFil">
+                <option [ngValue]=0>Farketmez</option>
+                <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.name}}</option>
             </select>
         </div>
         <div class="col-md-3">
             <label for="sel1">Renk Seçin:</label>
-            <select class="form-control" id="sel1">
-                <option>Fark Etmez</option>
-                <option *ngFor="let color of colors">{{color.name}}</option>
+            <select class="form-control" id="sel2" formControlName="colorIdFil">
+                <option [ngValue]=0>Farketmez</option>
+                <option *ngFor="let color of colors" [ngValue]="color.id">{{color.name}}</option>
             </select>
         </div>
-        <div class="col-md-2">
+        <!-- 
+            Yakında
+            <div class="col-md-2">
             <input type="text" class="form-control" placeholder="min-TL">
             <input type="text" class="form-control" placeholder="max-TL">
-        </div>
+        </div> -->
         <div class="col md-3">
-            <button class="btn btn-info filterButton">Filitrele</button>
+            <button class="btn btn-info filterButton" (click)="filter()">Filitrele</button>
         </div>
     </div>
-</div>
+</form>
 
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -33,27 +35,30 @@
             </div>
             <div class="modal-body" style="color:black">
                 <div class="card-body">
-
-
                     <form [formGroup]="carUpdateForm">
                         <label>Id</label>
                         <input class="form-control" formControlName="id" id="id" type="number" placeholder="Id"
                             value="{{updateCarClass.carId}}">
-                        <label>Araba Adı</label>
+                        <label>Araba</label>
                         <input class="form-control" formControlName="name" id="carName" type="text" placeholder="Ad"
                             value="{{updateCarClass.carName}}">
 
-                        <label>Marka Id</label>
-                        <input class="form-control" formControlName="brandId" id="brandId" type="number"
-                            placeholder="Marka" value="{{updateCarClass.brandId}}" />
+                        <label>Marka</label>
+                        <select class="form-control" formControlName="brandId">
+                            <option *ngFor="let brand of brands" selected="updateCarClass.id" [ngValue]="brand.id">
+                                {{brand.name}}</option>
+                        </select>
+
+                        <label>Renk</label>
+                        <select class="form-control" formControlName="colorId">
+                            <option *ngFor="let color of colors" selected="updateCarClass.id" [ngValue]="color.id">
+                                {{color.name}}</option>
+                        </select>
 
                         <label>Model Yılı</label>
                         <input class="form-control" formControlName="modelYear" id="modelYear" type="number"
                             placeholder="Model Yılı" value="{{updateCarClass.modelYear}}" />
 
-                        <label>Renk Id</label>
-                        <input class="form-control" formControlName="colorId" id="colorId" type="number"
-                            placeholder="Renk Id" value="{{updateCarClass.colorId}}" />
 
                         <label>Fiyat</label>
                         <input class="form-control" formControlName="dailyPrice" id="dailyPrice" type="number"
@@ -75,8 +80,10 @@
 
 
 
-
-<h3>Kiralık Arabalar</h3>
+<div class="d-flex justify-content-between">
+    <h3>Kiralık Arabalar</h3>
+    <button class="btn btn-success" routerLink="/car/add">Araba Ekle</button>
+</div>
 
 <div *ngIf="dataLoaded==false" class="spinner-border" role="status">
     <span class="visually-hidden"></span>
@@ -91,8 +98,8 @@
         <div class="carBox-header">
             <h3>{{car.brandName}}</h3>
             <div>
-                <button class="btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#updateModal" (click)="updateCarClassBtn(car)">Güncelle</button>
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
+                    (click)="updateCarClassBtn(car)">Güncelle</button>
                 <button routerLink="/cars/detail/{{car.carId}}" class="btn btn-secondary carButton">Detaylar</button>
                 <button class="btn btn-success carButton" routerLink="/payment/{{car.carId}}">Kirala</button>
             </div>

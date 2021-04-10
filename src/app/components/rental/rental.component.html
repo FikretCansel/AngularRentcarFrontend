@@ -1,19 +1,19 @@
 <h3>Kiralama Geçmişi</h3>
 
 <div class="table">
-    <table>
+    <table *ngIf="listRentals.data.length;else noRental">
         <thead>
-            <td>Araba Id</td>
-            <td>Müşteri Adı Soyadı</td>
+            <td>Araba Numarası</td>
             <td>Kiralama Tarihi</td>
             <td>Teslim Tarihi</td>
             <td>Kiralama Ücreti</td>
         </thead>
-        <tr *ngFor="let rental of rentals">
-            <td>{{rental.CarId}}</td>
-            <td>{{rental.ReturnDate}}</td>
-            <td>{{rental.RentDate}}</td>
-            <td>{{rental.TotalRentPrice}}</td>
+        <tr *ngFor="let rental of listRentals.data">
+            <td>{{rental.carId}}</td>
+            <td>{{rental.returnDate}}</td>
+            <td>{{rental.rentDate}}</td>
+            <td>{{rental.totalRentPrice}}</td>
         </tr>
     </table>
+    <ng-template #noRental>{{listRentals.message}}</ng-template>
 </div>
