@@ -13,7 +13,8 @@ Araç güncellemek açılan menü
 
 Detaylar Sayfası => Bu sayfada araçların fotograflarını ve detaylarını görebilir dilersek kiralama sayfasına gidebiliriz.
 
-![image](https://user-images.githubusercontent.com/61146337/113758890-18bfc980-971d-11eb-86e8-c5f40bb97d4b.png)
+![image](https://user-images.githubusercontent.com/61146337/114286003-f652e680-9a63-11eb-8af2-7b7fc173f00f.png)
+
 
 Kiralama Sayfası => Araç kiralamak için gün ve tarih seçiyoruz.
 
