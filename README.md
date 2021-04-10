@@ -4,12 +4,11 @@
 Araç Kiralama Sistemi
 
 Ana Ekran => Kiralanabilir Araçlar ve Özellikleri ve bu sayfadan kiralama ve detay sayfasına gidebilme özelligi eklendi.
-![image](https://user-images.githubusercontent.com/61146337/113758641-cda5b680-971c-11eb-93ed-21dfc59c4167.png)
+![image](https://user-images.githubusercontent.com/61146337/114285958-b7249580-9a63-11eb-9dfb-28a279b12335.png)
 
 Araç güncellemek açılan menü
 
-![image](https://user-images.githubusercontent.com/61146337/113788670-3190a500-9746-11eb-82b5-a521f836419b.png)
-
+![image](https://user-images.githubusercontent.com/61146337/114285976-d1f70a00-9a63-11eb-9e41-3bb02dc2c1d2.png)
 
 
 Detaylar Sayfası => Bu sayfada araçların fotograflarını ve detaylarını görebilir dilersek kiralama sayfasına gidebiliriz.
