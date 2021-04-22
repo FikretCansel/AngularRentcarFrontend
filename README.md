@@ -67,7 +67,7 @@ Backendden gelen (10dk) lık süre bittiginde otomatik çıkış yaparak login s
 Tasarımsal ve işlevsel geliştirmeler devam etmektedir...
 
 
-LinkedIn => https://www.linkedin.com/in/fikret-cansel-6701771a3/
+LinkedIn => https://www.linkedin.com/in/fikretcansel/
 
 
 
